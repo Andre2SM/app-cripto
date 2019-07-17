@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cripto app</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <section class="hero is-small is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">Cripto App</h1>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <div class="columns">
+              <div class="column">
+                <label for="cripto" class="label">Saltos sucesivos:</label>
+                <div class="field has-addons">
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="number"
+                      placeholder="123"
+                      name="saltos_sucesivos"
+                      id="saltos_sucesivos"
+                      maxlength="9"
+                      oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    />
+                  </div>
+                  <div class="control">
+                    <a
+                      class="button is-info"
+                      id="btn-saltos_sucesivos"
+                      onclick="insert_sucesivos()"
+                    >
+                      Agregar
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <label for="cripto" class="label">Saltos IDI:</label>
+                <div class="field has-addons">
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="123IDI"
+                      name="saltos_idi"
+                      id="saltos_idi"
+                    />
+                  </div>
+                  <div class="control">
+                    <a
+                      class="button is-info"
+                      id="btn-saltos_idi"
+                      onclick="insert_idi()"
+                    >
+                      Agregar
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column">
+                <label for="cripto" class="label">Clave de Trama:</label>
+                <div class="field has-addons">
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="number"
+                      placeholder="1234"
+                      name="clave_trama"
+                      id="clave_trama"
+                      maxlength="6"
+                      oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    />
+                  </div>
+                  <div class="control">
+                    <a
+                      class="button is-info"
+                      id="btn-clave_trama"
+                      onclick="insert_trama()"
+                    >
+                      Agregar
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <label for="cripto" class="label"
+                  >Clave de Transposición:</label
+                >
+                <div class="field has-addons">
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="number"
+                      placeholder="1234"
+                      name="clave_transpo"
+                      id="clave_transpo"
+                      maxlength="6"
+                      oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                    />
+                  </div>
+                  <div class="control">
+                    <a
+                      class="button is-info"
+                      id="btn-clave_transpo"
+                      onclick="insert_transpo()"
+                    >
+                      Agregar
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="columns">
+              <div class="column">
+                <p>Cadena de Filtros</p>
+                <p id="cadena_filtros"></p>
+              </div>
+              <div class="column">
+                <p style="visibility: hidden">asa</p>
+                <div class="field">
+                  <div class="control">
+                    <button
+                      class="button is-primary"
+                      id="limpiar"
+                      onclick="limpiar()"
+                    >
+                      Limpiar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="columns">
+              <div class="column">
+                <label for="cripto" class="label">Cripto</label>
+                <input
+                  type="hidden"
+                  id="cripto"
+                  name="cripto"
+                  size="26"
+                  value="abcdefghijklmnopqrstuvwxyz"
+                  disabled
+                />
+                <div class="field">
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      id="filtro_cripto"
+                      name="filtro_cripto"
+                      placeholder="Cadena de Filtros"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="column">
+                <label for="cripto" class="label">Llano:</label>
+                <input
+                  type="hidden"
+                  id="llano"
+                  name="llano"
+                  size="26"
+                  value="abcdefghijklmnopqrstuvwxyz"
+                  disabled
+                />
+                <div class="field">
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="Cadena de Filtros"
+                      id="filtro_llano"
+                      name="filtro_llano"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label for="cripto" class="label">Texto:</label>
+              <div class="control">
+                <textarea name="frase" id="frase" class="textarea"></textarea>
+              </div>
+            </div>
+            <div class="field is-grouped">
+              <div class="control">
+                <button
+                  class="button is-primary"
+                  id="ejecutar"
+                  onclick="encriptar()"
+                >
+                  Encriptar
+                </button>
+              </div>
+              <div class="control">
+                <button
+                  class="button is-danger"
+                  id="ejecutar-des"
+                  onclick="desencriptar()"
+                >
+                  Desencriptar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column">
+            <h3>Texto encriptado</h3>
+            <p id="area1"></p>
+          </div>
+          <div class="column">
+            <h3>Texto desencriptado</h3>
+            <p id="area2"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="footer has-text-centered"></footer>
+    <script type="text/javascript" src="lib/main.js"></script>
+  </body>
+</html>
